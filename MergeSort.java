@@ -7,15 +7,15 @@ public class MergeSort {
         System.out.println();
     }
 
-    public static void MergeSort(int arr[], int si, int ei){
+    public static void mergeSort(int arr[], int si, int ei){
         if(si >= ei){
             return;
         }
 
         int mid = si + (ei-si)/2; // calculating mid index of array
 
-        MergeSort(arr, si, mid);
-        MergeSort(arr, mid+1, ei);
+        mergeSort(arr, si, mid);
+        mergeSort(arr, mid+1, ei);
         Merge(arr, si, mid, ei);    
     }
 
@@ -56,7 +56,7 @@ public class MergeSort {
         int arr[] = {1,5,9,7,2,3,6,45,2,22};
         System.out.print("Before sorting : ");
         printArr(arr);
-        MergeSort(arr, 0, arr.length -1);
+        mergeSort(arr, 0, arr.length -1);
         System.out.print("After sorting : ");
         printArr(arr);
     }
