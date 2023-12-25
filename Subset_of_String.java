@@ -1,5 +1,7 @@
 public class Subset_of_String {
     
+// Tc = O(n * 2^n)
+// Sc = O(n)
     public static void subset_of_String (String  raw, String answer, int i){
       
         if(i == raw.length()){ // basecase
