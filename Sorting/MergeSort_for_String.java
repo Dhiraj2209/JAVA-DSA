@@ -1,3 +1,4 @@
+package Sorting;
 public class MergeSort_for_String {
     public static void printArr(String arr[]){
         for(int i = 0; i < arr.length; i++){

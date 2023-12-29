@@ -1,3 +1,4 @@
+package Serching;
 public class Binary_Serch {
     
     public static int binary_serch(int arr[], int key){

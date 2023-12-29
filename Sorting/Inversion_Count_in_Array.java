@@ -1,3 +1,4 @@
+package Sorting;
 public class Inversion_Count_in_Array {
     
         public static void printArr(int arr[]){ //Printing Array
