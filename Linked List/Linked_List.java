@@ -58,7 +58,7 @@ public class Linked_List {
         temp.next = newNode;
     }
 
-    public int RemoveFirst(){
+    public int RemoveFirst(){ // O(1)
 
         if(Size == 0){
             System.out.println("Linked List is Empty.");
@@ -77,7 +77,7 @@ public class Linked_List {
         return val;
     }
 
-    public int RemoveLast(){
+    public int RemoveLast(){// O(n)
         if(Size == 0){
             System.out.println("Linked List is Empty.");
             return Integer.MIN_VALUE;
@@ -101,8 +101,78 @@ public class Linked_List {
         return val;
     }
 
-    public void Print_LL(){ // O(n)
+    public int IterativeSerch(int target){ // O(n) 
         Node temp = head;
+        int position = 1;
+        
+        while(temp != null){
+            if(temp.data == target){
+                return position;
+            }
+            else {
+                temp = temp.next;
+                position++;
+            }
+        }
+        
+        return -1;
+    }
+
+    public int HelperOfRecursiveSerch(int target, Node head){ // O(n)
+        if(head == null){
+            return -1;
+        }
+
+        if(head.data == target){
+            return 0;
+        }
+        int idx = HelperOfRecursiveSerch(target , head.next);
+        
+        if(idx == -1){
+            return -1;
+        }
+
+        return idx + 1;
+    }
+    
+    public int RecursiveSerch(int target){
+        return HelperOfRecursiveSerch(target, head);
+    }
+
+    public void ReverseLL(){ // O(n)
+        Node curr = tail = head;
+        Node prev = null;
+        Node next;
+
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+    }
+
+    public void deletNthFromEnd(int n){ // O(n)
+        int i = 1; 
+        Node temp = head;
+
+        if(n == Size){
+            head =head.next;
+            return;
+        }
+
+        while(i < (Size- n)){
+            temp = temp.next;
+            i++;
+        }
+
+        temp.next= temp.next.next;
+        return;
+    }
+
+    public void Print_LL(){ // O(n)
+        Node temp = head; 
 
         if(temp == null){
             System.out.println("Linked List is Empty.");
@@ -121,6 +191,8 @@ public class Linked_List {
         ll.AddFirst(900);
         ll.AddFirst(2024);
         ll.AddLast(2004);
+        ll.AddLast(2784);
+        ll.AddLast(84);
         ll.Print_LL();
         ll.AddInMiddle(0, 220);
         ll.Print_LL();
@@ -145,5 +217,15 @@ public class Linked_List {
 
         ll.Print_LL();
         System.out.println("Size of Linked List is : "+ll.Size);
+
+        System.out.println("Target element found at position : " + ll.IterativeSerch(220));
+        System.out.println("Target element found at position : " + (ll.RecursiveSerch(2004) + 1));
+        
+        ll.ReverseLL();
+        ll.Print_LL();
+        System.out.println("Target element found at position : " + (ll.RecursiveSerch(900) + 1));
+
+        ll.deletNthFromEnd(4);
+        ll.Print_LL();
     }
 }
