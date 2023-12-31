@@ -233,6 +233,58 @@ public class Linked_List {
         return true;
     }
 
+    public static boolean IsCycle(){ //Floyd's Cycle Finding Algorithm
+        Node fast = head;
+        Node slow = head;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next ;
+            fast = fast.next.next;
+            if(slow == fast){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void RemoveCycle(){
+        //Detect cycle
+        Node fast = head;
+        Node slow = head;
+        boolean cycle = false;
+        Node prev = null; // Node for breaking loop/Cycle
+
+        while(fast != null && fast.next != null){
+
+            prev = slow;
+            slow = slow.next ;
+            fast = fast.next.next;
+            if(slow == fast && fast == head){ // Linked List make Full Loop (Circular Linked List)
+                prev.next = null; // Break loop
+                return; // Return from function
+            }
+            else if(slow == fast){
+                cycle = true;
+                break;
+            } 
+        }
+        
+        if(cycle == false){
+            return;
+        }
+        // Find Meeting point
+        slow = head; // Initializing slow with head
+        
+        while(slow != fast){
+            prev = fast;
+            fast = fast.next;
+            slow = slow.next;
+        }
+        // Removing Cycle
+        prev.next = null;
+    }
+
     public static void main(String[] args) {
         Linked_List ll = new Linked_List(); //New Linked List.
         ll.AddFirst(900);
@@ -243,7 +295,7 @@ public class Linked_List {
         ll.Print_LL();
         ll.AddInMiddle(0, 220);
         ll.Print_LL();
-        
+
         System.out.println("Size of Linked List is : "+ll.Size);
 
         int tempval = ll.RemoveFirst();
@@ -277,5 +329,16 @@ public class Linked_List {
         ll.Print_LL();
 
         System.out.println(ll.IsPalindrom());
+
+        head = ll.new Node(8);
+        head.next = ll.new Node(7);
+        head.next.next = ll.new Node(78);
+        head.next.next.next = ll.new Node(788);
+        head.next.next.next.next = head.next.next;
+
+        System.out.println(IsCycle());
+        ll.RemoveCycle();
+        ll.Print_LL();
+        System.out.println(IsCycle());
     }
 }
