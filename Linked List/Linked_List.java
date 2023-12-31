@@ -186,16 +186,64 @@ public class Linked_List {
         System.out.println("NULL");
     }
 
+    //Slow -Fast Approch
+    public Node FindMid(){
+        Node Slow = head;
+        Node Fast = head;
+        
+        while(Fast != null && Fast.next != null){
+            Slow = Slow.next;
+            Fast = Fast.next.next;
+        }
+
+        return Slow;
+    }
+
+    public boolean IsPalindrom(){
+        if(head == null || head.next == null){
+            return true;
+        }
+    
+        Node mid = FindMid();
+
+        // For reversing second half of LL
+        Node prev = null;
+        Node curr = mid;
+        Node next;
+
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        Node Righthead = prev;
+        Node Lefthead = head;
+
+        // Checking LL is palindrome or not 
+
+        while(Righthead != null){
+            if(Righthead.data != Lefthead.data){
+                return false;
+            }
+            Lefthead = Lefthead.next;
+            Righthead = Righthead.next;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         Linked_List ll = new Linked_List(); //New Linked List.
         ll.AddFirst(900);
         ll.AddFirst(2024);
-        ll.AddLast(2004);
+        ll.AddLast(2024);
         ll.AddLast(2784);
         ll.AddLast(84);
         ll.Print_LL();
         ll.AddInMiddle(0, 220);
         ll.Print_LL();
+        
         System.out.println("Size of Linked List is : "+ll.Size);
 
         int tempval = ll.RemoveFirst();
@@ -227,5 +275,7 @@ public class Linked_List {
 
         ll.deletNthFromEnd(4);
         ll.Print_LL();
+
+        System.out.println(ll.IsPalindrom());
     }
 }
