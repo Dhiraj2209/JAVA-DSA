@@ -24,6 +24,43 @@ public class StackUsingJCF{
         PushAtBottom(top,s);
     }
 
+    public static Boolean ValidParentheses(String str){
+        Stack<Character> sv = new Stack<>();
+        int i = 0 ;
+        
+        if(str.length() % 2 != 0 || str.length() == 0){
+            return false;
+        }
+
+        while(i < str.length()){
+            char curr = str.charAt(i);
+            
+            if(curr == '(' || curr == '[' || curr == '{'){
+                sv.push(curr);
+            }
+            else {
+
+                if (sv.isEmpty()) {
+                    return false;
+                }
+
+                char com = sv.pop();
+
+                if(curr == ')' && com != '('){
+                    return false;
+                }
+                else if(curr == '}' && com != '{'){
+                    return false;
+                }
+                else if(curr == ']' && (com == ')' || com == '}')) {
+                    return false;
+                }
+            }
+            i++;
+        }
+        return true;
+    }
+
     public static String RevString(String str){
         Stack<Character> sc =  new Stack<>();
         int i = 0;
@@ -50,5 +87,7 @@ public class StackUsingJCF{
         RevStack(s);
         System.out.println(s);
         System.out.println(RevString("dhiraj"));
+        System.out.println(ValidParentheses("(()){}[]{{[(({}))]}}{{{{{{}}}}}}()()()()()()()"));
+        System.out.println(ValidParentheses("}"));
     }
 }
