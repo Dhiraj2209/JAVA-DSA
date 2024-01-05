@@ -26,6 +26,7 @@ public class QueueUsingLL {
             Node newnode = new Node(data);
             if(IsEmpty()){
                 head = tail = newnode;
+                return;
             }
 
             tail.next = newnode;
@@ -39,7 +40,12 @@ public class QueueUsingLL {
             }
 
             int val = head.data;
+            if(head == tail){
+                head = tail = null;
+            }
+            else {   
             head = head.next;
+            }
             return val;
         }
 
