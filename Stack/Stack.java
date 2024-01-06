@@ -17,11 +17,11 @@ public class Stack{
 
         static Node head = null;
 
-        public static boolean IsEmpty(){
+        public boolean IsEmpty(){
             return head == null;
         }
 
-        public static void Push(int data){
+        public void Push(int data){
             Node newnode = new Node(data);
 
             if(IsEmpty()){
@@ -34,7 +34,7 @@ public class Stack{
             return;
         }
 
-        public static int Pop(){
+        public int Pop(){
             if(IsEmpty()){
                 return -1;
             }
@@ -44,7 +44,7 @@ public class Stack{
             return top;
         }
 
-        public static int Peek(){
+        public int Peek(){
             if(IsEmpty()){
                 return -1;
             }
@@ -52,7 +52,7 @@ public class Stack{
             return head.data;
         }
 
-        public static void PushAtBottom(int data){
+        public void PushAtBottom(int data){
             Node newnode = new Node(data);
             Node temp = head;
 
@@ -68,7 +68,7 @@ public class Stack{
             return;
         }
 
-        public static void InsertAtBottomRec(stack s, int data){
+        public void InsertAtBottomRec(stack s, int data){
             Node newnode = new Node(data);
 
             if(IsEmpty()){
@@ -81,7 +81,7 @@ public class Stack{
             s.Push(top);
         }
 
-        public static void PrintStack(){
+        public void PrintStack(){
             
             Node temp = head;
 
