@@ -1,4 +1,4 @@
-package Stack;
+package Queue;
 // Deque Using Linked List
 public class Deque {
 
