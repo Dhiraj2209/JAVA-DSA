@@ -1,5 +1,4 @@
 package Stack;
-import java.util.ArrayList;
 
 public class Stack{
     
@@ -69,8 +68,7 @@ public class Stack{
         }
 
         public void InsertAtBottomRec(stack s, int data){
-            Node newnode = new Node(data);
-
+            
             if(IsEmpty()){
                 s.Push(data);
                 return;
