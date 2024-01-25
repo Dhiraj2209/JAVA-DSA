@@ -2,7 +2,7 @@ import java.util.ArrayList;
 //import java.util.*;
 public class Maximum_water_in_container {
     
-    //TC = O(n) 2 pointer approch
+    //Time complexity= O(n) 2 pointer approch
     public static int Mostwater(ArrayList<Integer> Ht){
         int si = 0;
         int ei = Ht.size() -1;
