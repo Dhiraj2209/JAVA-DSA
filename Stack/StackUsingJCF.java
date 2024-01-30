@@ -1,4 +1,4 @@
-package Stack;
+// package Stack;
 import java.util.Stack;
 
 public class StackUsingJCF{
