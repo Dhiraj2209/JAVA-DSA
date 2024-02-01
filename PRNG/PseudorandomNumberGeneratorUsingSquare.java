@@ -4,8 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 
-public class PseudoNumberGeneratorUsingSquare {
+public class PseudorandomNumberGeneratorUsingSquare {
     
     private static final String FILE_PATH = "seed.txt";
 
@@ -41,7 +42,7 @@ public class PseudoNumberGeneratorUsingSquare {
             e.printStackTrace();
         }
         // Default seed value if file doesn't exist or cannot be read
-        return 4551;
+        return (int) ((System.nanoTime() / 1000) % 10000);
     }
 
     public static void writeSeedToFile(int seed) {
