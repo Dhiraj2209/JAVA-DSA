@@ -19,34 +19,57 @@ public class SwappingNodeInLL {
         System.out.println("Null");
     }
 
-    public static void swapNodes(int x, int y, ListNode headA){
+    public static ListNode swapNodes(int x, int y, ListNode head){
 
-        if(x == y){
-            return;
-        }
-
-        ListNode temp1 = null, temp2 = headA;
-        for(int i = 1 ; i < x && temp2 != null; i++){
-            temp1 = temp2;
-            temp2 = temp2.next;
-        }
-        //temp2 = temp1.next;
-        ListNode temp3 = null, temp4 = headA;
-        for(int i = 1 ; i < y && temp4 != null; i++){
-            temp3 = temp4;
-            temp4 = temp4.next;
+        if(x == y || head == null){
+            return head;
         }
 
-        ListNode temp = temp4.next;
-        temp4.next = temp2.next;
-        temp3.next = temp2;
-        if(x == 1){
-            //temp1 = temp4;
-            headA = temp4;
-        }else{
-        temp1.next = temp4;
+        ListNode Xprev = null;
+        ListNode Yprev = null;
+
+        ListNode X = head;
+        ListNode Y = head;
+
+        for(int i = 1 ; i < x && X != null;i++){
+            Xprev = X;
+            X = X.next;
         }
-        temp2.next = temp;
+
+        for(int i = 1 ; i < y && Y != null; i++){
+            Yprev = Y;
+            Y = Y.next;
+        }
+
+        if(X == null || Y == null){
+            return head;
+        }
+
+        // if (Xprev == null) {
+        //     head = Y;
+        // } else {
+        //     Xprev.next = Y;
+        // }
+
+        if(Xprev != null){
+            Xprev.next = Y;
+        }
+        else{
+            head = Y;
+        }
+        
+        
+        if (Yprev == null) {
+            head = X;
+        } else {
+            Yprev.next = X;
+        }
+
+        ListNode temp = X.next;
+        X.next = Y.next;
+        Y.next = temp;
+
+        return head;
     }
 
     public static void main(String[] args) {
@@ -60,8 +83,7 @@ public class SwappingNodeInLL {
         // headA.next.next.next.next.next.next.next = new ListNode(80);
 
         printll(headA);
-
-        swapNodes(2, 5, headA);
+        swapNodes(3, 1, headA);
         printll(headA);
     }
 }
