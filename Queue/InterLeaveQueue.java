@@ -4,7 +4,7 @@ import java.util.Queue;
 
 public class InterLeaveQueue {
 
-    public static void interleave(){ // O(n) , O(n)
+public static void interleave(){ // O(n) , O(n)~
         int size = q.size();
         System.out.println("Size "+ size);
         Queue<Integer> q2 = new LinkedList<>();
