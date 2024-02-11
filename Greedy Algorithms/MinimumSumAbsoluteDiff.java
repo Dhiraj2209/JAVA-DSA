@@ -2,12 +2,12 @@
 in array B, such that sum S of absolute differences of all the pairs is minimum.*/
 
 import java.util.Arrays;
-import java.math.*;
+//import java.math.*;
 
 public class MinimumSumAbsoluteDiff { // O(nlogn)
     public static void main(String[] args) {
-        int a[] = {3,2,3,5};
-        int b[] = {2,1,3,8};
+        int a[] = {1,2,3};
+        int b[] = {2,1,3};
 
         Arrays.sort(a);
         Arrays.sort(b);
