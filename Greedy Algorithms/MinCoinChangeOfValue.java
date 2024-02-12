@@ -10,7 +10,7 @@ public class MinCoinChangeOfValue {
 
         Arrays.sort(curr, Comparator.reverseOrder());
 
-        int amount = 2537;
+        int amount = 2530;
         int count= 0;
         System.out.print("Notes to Make Change : " );
         for(int i = 0 ; i < curr.length ;i++){
@@ -19,6 +19,9 @@ public class MinCoinChangeOfValue {
                     System.out.print(curr[i] + ", ");
                     count++;
                     amount -= curr[i];
+                    if(amount == 0){
+                        break;
+                    }
                 }
             }
         }
