@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinaryTree {
     
     static class Node {
@@ -29,28 +32,126 @@ public class BinaryTree {
 
             return newnode;
         }
+
+        public void preOrder(Node root){ //O(n)
+            if(root == null){
+                return;
+            }
+            System.out.print(root.data + " ");
+            preOrder(root.left);
+            preOrder(root.right);
+        }
+    
+        public void inOrder(Node root){ //O(n)
+            if(root == null){
+                return;
+            }
+            inOrder(root.left);
+            System.out.print(root.data + " ");
+            inOrder(root.right);
+        }
+    
+        public void postOrder(Node root){ //O(n)
+            if(root == null){
+                return;
+            }
+            postOrder(root.left);
+            postOrder(root.right);
+            System.out.print(root.data + " ");
+        }
+
+        public void levelOrder(Node root){ //O(n)
+            if(root  == null){
+                return;
+            }
+
+            Queue<Node> q = new LinkedList<>();
+            q.add(root);
+            q.add(null);
+
+            while(!q.isEmpty()){
+                Node currNode = q.remove();
+                if(currNode == null){
+                    System.out.println();
+                    if(q.isEmpty()){
+                        break;
+                    }
+                    else {
+                        q.add(null);
+                    }
+                }
+                else {
+                    System.out.print(currNode.data + " ");
+                    if(currNode.left != null){
+                        q.add(currNode.left);
+                    }
+                    if(currNode.right != null){
+                        q.add(currNode.right);
+                    }
+                }
+            }
+        }
+
+        public int heightOfTree(Node root){ //O(n)
+            if(root == null){
+                return 0;
+            }
+
+            int lh = heightOfTree(root.left);
+            int rh = heightOfTree(root.right);
+
+            return Math.max(lh, rh) + 1 ;
+        }
+
+        public int countOfNodes(Node root){ //O(n)
+            if(root == null){
+                return 0;
+            }
+
+            int l = countOfNodes(root.left);
+            int r = countOfNodes(root.right);
+
+            return l + r +1;
+        }
+
+        public int sumOfNodes(Node root){
+            if(root == null){
+                return 0;
+            }
+
+            int lsum = sumOfNodes(root.left);
+            int rsum = sumOfNodes(root.right);
+
+            return lsum + rsum + root.data;
+        }
     }
 
-    public static void preOrder(Node root){ //O(n)
-        if(root == null){
-            return;
-        }
-        System.out.print(root.data + " ");
-        preOrder(root.left);
-        preOrder(root.right);
-    }
+    
 
     public static void main(String args[]){
-        int nodes[] = {8,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
+        int nodes[] = {8,2,-1,-1,4,-1,-1};
 
         Binarytree tree = new Binarytree();
 
         Node root = tree.buildtree(nodes);
 
-
         System.out.println(root.data);
         System.out.println(root.left.data);
 
-        preOrder(root);
+        System.out.print("Preorder : ");
+        tree.preOrder(root);
+        System.out.print("\nInorder : ");
+        tree.inOrder(root);
+        System.out.print("\npostorder : ");
+        tree.postOrder(root);
+
+        System.out.print("\nLevelorder : \n");
+        tree.levelOrder(root);
+
+        System.out.println("Height of tree : " + tree.heightOfTree(root));
+        
+        System.out.println("Count of Nodes: " + tree.countOfNodes(root));
+        
+        System.out.print("Sum of Nodes : " + tree.sumOfNodes(root));
     }
 }
