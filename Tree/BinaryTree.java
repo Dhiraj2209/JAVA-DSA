@@ -124,6 +124,21 @@ public class BinaryTree {
 
             return lsum + rsum + root.data;
         }
+
+        public int diameterOfTree(Node root){ //O(n^2)
+            if(root == null){
+                return 0;
+            }
+
+            int leftdia = diameterOfTree(root.left);
+            int lh = heightOfTree(root.left);
+            int rightdia = diameterOfTree(root.right);
+            int rh = heightOfTree(root.right);
+
+            int selfdia = lh + rh + 1 ;
+
+            return Math.max(selfdia , Math.max(leftdia, rightdia));
+        }
     }
 
     
@@ -152,6 +167,8 @@ public class BinaryTree {
         
         System.out.println("Count of Nodes: " + tree.countOfNodes(root));
         
-        System.out.print("Sum of Nodes : " + tree.sumOfNodes(root));
+        System.out.println("Sum of Nodes : " + tree.sumOfNodes(root));
+
+        System.out.println("Diameter of Tree : " + tree.diameterOfTree(root));
     }
 }
