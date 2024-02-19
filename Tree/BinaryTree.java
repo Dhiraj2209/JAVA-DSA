@@ -139,6 +139,30 @@ public class BinaryTree {
 
             return Math.max(selfdia , Math.max(leftdia, rightdia));
         }
+
+        static class Info {
+            int diam;
+            int ht;
+
+            public Info(int diam, int ht){
+                this.ht = ht;
+                this.diam = diam;
+            }
+        }
+
+        public Info diamOfTree(Node root){ //  O(n)
+            if(root == null){
+                return new Info(0,0);
+            }
+
+            Info leftinfo = diamOfTree(root.left);
+            Info rightinfo = diamOfTree(root.right);
+
+            int diam = Math.max(leftinfo.diam , Math.max(rightinfo.diam, (leftinfo.ht + rightinfo.ht + 1)));
+            int ht = Math.max(leftinfo.ht, rightinfo.ht) + 1;
+
+            return new Info(diam, ht);
+        }
     }
 
     
@@ -170,5 +194,7 @@ public class BinaryTree {
         System.out.println("Sum of Nodes : " + tree.sumOfNodes(root));
 
         System.out.println("Diameter of Tree : " + tree.diameterOfTree(root));
+
+        System.out.println("Diameter of Tree : " + tree.diamOfTree(root).diam);
     }
 }
