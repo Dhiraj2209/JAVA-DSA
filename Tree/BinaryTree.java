@@ -165,7 +165,44 @@ public class BinaryTree {
         }
     }
 
-    
+    public static boolean isSubtree(Node root, Node subroot){ //O(n^2)
+
+        if(root == null){
+            return false;
+        }
+
+        if(root.data == subroot.data){
+            if(isIndetical(root, subroot)){
+                return true;
+            }
+        }
+
+        // boolean leftans = isSubtree(root.left, subroot);
+        // boolean rightans = isSubtree(root.right, subroot);
+
+        // return leftans || rightans;
+
+        return isSubtree(root.left, subroot) ||  isSubtree(root.right, subroot);
+    }
+ 
+    public static boolean isIndetical(Node node, Node subroot){ // O(n)
+        if(node == null && subroot == null){
+            return true;
+        }
+        else if(node == null || subroot == null || (node.data != subroot.data)) {
+            return false;
+        }
+
+        if(!isIndetical(node.left, subroot.left)){
+            return false;
+        }
+
+        if(!isIndetical(node.right, subroot.right)){
+            return false;
+        }
+
+        return true;
+    }
 
     public static void main(String args[]){
         int nodes[] = {8,2,-1,-1,4,-1,-1};
@@ -196,5 +233,18 @@ public class BinaryTree {
         System.out.println("Diameter of Tree : " + tree.diameterOfTree(root));
 
         System.out.println("Diameter of Tree : " + tree.diamOfTree(root).diam);
+        
+        //BinaryTree tree1 = new BinaryTree();
+
+        Node newroot = new Node(1);
+        newroot.left = new Node(8);
+        newroot.left.left = new Node(2);
+        newroot.right = new Node(80);
+        newroot.left.right = new Node(4);
+        newroot.right.left = new Node(60);
+        newroot.right.right = new Node(90);
+
+        System.out.println(isSubtree(newroot, root));
+    
     }
 }
