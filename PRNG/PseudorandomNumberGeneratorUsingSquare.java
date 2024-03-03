@@ -19,7 +19,7 @@ public class PseudorandomNumberGeneratorUsingSquare {
         // Reading the seed value from the file
         int seed = readSeedFromFile();
 
-        int seedsquare = (int)(seed * seed * 2.85788557498);
+        int seedsquare = (int)(seed * seed * 3.14159265352);
         // Updataing the seed value
         String str = String.format("%08d",seedsquare % 100000000);
         seed = (int) (Integer.valueOf(str.substring(3, 7)));
@@ -28,8 +28,8 @@ public class PseudorandomNumberGeneratorUsingSquare {
         writeSeedToFile(seed);
 
 
-        System.out.println("Random Number : " + str);
-        //System.out.println("Updated Seed: " + seed);
+        System.out.println("Random Number : " + str.substring(1, 7));
+        System.out.println("Updated Seed: " + seed);
     }
 
     public static int readSeedFromFile() {
