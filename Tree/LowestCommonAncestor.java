@@ -53,7 +53,65 @@ public class LowestCommonAncestor {
         Node lca = path1.get(i-1);
         return lca;
     }
+
+    public static Node lca(Node root,int n1, int n2 ){ //O(n)
+        if(root == null ||root.data == n1 || root.data == n2){
+            return root;
+        }
+
+        Node lcaLeft = lca(root.left, n1,n2);
+        Node lcaRight = lca(root.right, n1,n2);
+
+        if(lcaRight == null){
+            return lcaLeft;
+        }
+        if(lcaLeft == null){
+            return lcaRight;
+        }
+
+        return root;
+    }
+    
+    public static int lcaDist(Node root, int n){ // Dist betwen lca node and node n
+        if(root == null){ 
+            return -1;
+        }
+
+        if(root.data == n){
+            return 0;
+        }
+
+        int leftds = lcaDist(root.left, n);
+        int rightds = lcaDist(root.right, n);
+
+        if(leftds == -1 && rightds == -1){
+            return -1;
+        }
+        else if(leftds == -1) {
+            return rightds +1;
+        }
+        else {
+            return leftds +1;
+        }
+    }
+
+    public static int minDistanceBetweenNodes(Node root, int n1, int n2){ // Min distance between two nodes. // O(n)
+        Node lca = lca(root, n1, n2);
+        int dis1 = lcaDist(lca,n1);
+        int dis2 = lcaDist(lca,n2);
+
+        return dis1 +dis2;
+    }
+
+
     public static void main(String arg[]){
+        /*
+                1
+               / \
+              2   3
+             / \   \
+            13  5   6      
+        */
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
@@ -61,6 +119,8 @@ public class LowestCommonAncestor {
         root.left.left = new Node(13);
         root.right.right = new Node(6);
 
-        System.out.println(LowestCommAncestor(root, 13,5).data);
+        System.out.println("Lowest Common Ancestor : " + LowestCommAncestor(root, 13,5).data);
+        System.out.println("Lowest Common Ancestor : " + lca(root, 13,6).data);
+        System.out.println("Minimum distance between nodes : " + minDistanceBetweenNodes(root, 5, 6));
     }
 }
