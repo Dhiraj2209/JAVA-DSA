@@ -103,6 +103,33 @@ public class LowestCommonAncestor {
         return dis1 +dis2;
     }
 
+    public static int KAncestor(Node root, int n , int k){
+        if(root == null){
+            return -1;
+        }
+
+        if(root.data ==n){
+            return 0;
+        }
+
+
+        int leftd = KAncestor(root.left, n, k);
+        
+        int rightd = KAncestor(root.right, n, k);
+
+        if(leftd == -1 && rightd == -1){
+            return -1;
+        }
+
+        int max = Math.max(leftd, rightd);
+        if(max+1 == k){
+            System.out.println("Kth ancestor : "+root.data);
+        }
+
+        return max+1;
+        
+    }
+
 
     public static void main(String arg[]){
         /*
@@ -122,5 +149,8 @@ public class LowestCommonAncestor {
         System.out.println("Lowest Common Ancestor : " + LowestCommAncestor(root, 13,5).data);
         System.out.println("Lowest Common Ancestor : " + lca(root, 13,6).data);
         System.out.println("Minimum distance between nodes : " + minDistanceBetweenNodes(root, 5, 6));
+        // System.out.println("Kth Ancestor : " + KAncestor(root, 5, 2));
+
+        KAncestor(root, 13, 1);
     }
 }
