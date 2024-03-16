@@ -39,6 +39,20 @@ public class TransformToSumTree {
         preOrderTraversal(root.left);
         preOrderTraversal(root.right);
     }
+
+    public static boolean isUnivalued(Node root, int val) {
+        if (root == null) {
+            return true;
+        }
+    
+        if (root.data != val) {
+            return false;
+        }
+    
+        return isUnivalued(root.left, val) && isUnivalued(root.right, val);
+    }
+    
+
     public static void main(String arg[]){
         /*
                  1
@@ -58,14 +72,15 @@ public class TransformToSumTree {
         */
 
         Node root = new Node(1);
-        root.left = new Node(2);
-        root.right = new Node(3);
-        root.left.right = new Node(5);
-        root.left.left = new Node(13);
-        root.right.right = new Node(6);
-        root.right.left = new Node(48);
+        root.left = new Node(1);
+        root.right = new Node(1);
+        root.left.right = new Node(1);
+        root.left.left = new Node(10);
+        // root.right.right = new Node(6);
+        // root.right.left = new Node(48);
 
-        transformTree(root);
-        preOrderTraversal(root);
+        // transformTree(root);
+        // preOrderTraversal(root);
+        System.out.println(isUnivalued(root, root.data));
     }
 }
