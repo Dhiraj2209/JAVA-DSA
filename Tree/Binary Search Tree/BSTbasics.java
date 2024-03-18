@@ -1,5 +1,5 @@
-
 public class BSTbasics {
+
     static class Node {
     
         int data;
@@ -29,7 +29,7 @@ public class BSTbasics {
         return root;
     }
 
-    public static boolean IsAvalibleInBST(Node root, int val){
+    public static boolean IsAvalibleInBST(Node root, int val){ //O(h)
         if(root == null){
             return false;
         }
@@ -44,6 +44,44 @@ public class BSTbasics {
         else {
             return IsAvalibleInBST(root.left, val);
         }
+    }
+
+    public static Node delet(Node root, int val){ //O(n)
+        if(root.data < val){
+            root.right = delet(root.right, val);
+        }
+        else if(root.data > val){
+            root.left = delet(root.left , val);
+        }
+        else {
+
+            //leaf node
+            if(root.right == null && root.left == null){
+                return null;
+            }
+
+            //single node
+            if(root.left == null){
+                return root.right;
+            }
+            else if(root.right == null){
+                return root.left;
+            }
+
+            //both children
+            Node IS = findInOrderSuccessor(root.right);
+            root.data = IS.data;
+            root.right = delet(root.right, IS.data);
+        }
+        return root;
+    }
+    
+    public static Node findInOrderSuccessor(Node root){// most left element 
+        while(root.left != null){
+            root = root.left;
+        }
+
+        return root;
     }
 
     public static void inOrderTraversal(Node root){
@@ -65,11 +103,10 @@ public class BSTbasics {
         for(int i:values){
             root = insertNodeinBST(root, i);
         }
-        // for(int i = 0 ; i < values.length ;i++){
-        //     root = insertNodeinBST(root, values[i]);
-        // }
         inOrderTraversal(root);
         // IsAvalibleInBST(root, 6);
-        System.out.println(IsAvalibleInBST(root, -10));
+        System.out.println(IsAvalibleInBST(root, -100));
+        delet(root, 5);
+        inOrderTraversal(root);
     }
 }
