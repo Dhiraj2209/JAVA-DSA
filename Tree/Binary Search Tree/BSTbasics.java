@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BSTbasics {
 
     static class Node {
@@ -84,6 +88,24 @@ public class BSTbasics {
         return root;
     }
 
+    public static void printInRange(Node root, int k1, int k2){
+        if(root == null){
+            return;
+        }
+        
+        if(root.data >= k1  && root.data <= k2){
+            printInRange(root.left, k1, k2);
+            System.out.print(root.data + " ");
+            printInRange(root.right, k1, k2);
+        }
+        else if(root.data < k1){
+            printInRange(root.left, k1, k2);
+        }
+        else {
+            printInRange(root.right, k1, k2);
+        }
+    }
+
     public static void inOrderTraversal(Node root){
     
         if(root == null){
@@ -95,9 +117,55 @@ public class BSTbasics {
         inOrderTraversal(root.right);
     }
 
+    public static void levelOrder(Node root){ //O(n)
+        if(root  == null){
+            return;
+        }
+
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        q.add(null);
+
+        while(!q.isEmpty()){
+            Node currNode = q.remove();
+            if(currNode == null){
+                System.out.println();
+                if(q.isEmpty()){
+                    break;
+                }
+                else {
+                    q.add(null);
+                }
+            }
+            else {
+                System.out.print(currNode.data + " ");
+                if(currNode.left != null){
+                    q.add(currNode.left);
+                }
+                if(currNode.right != null){
+                    q.add(currNode.right);
+                }
+            }
+        }
+    }
+
+    public static void printPath(Node root, ArrayList<Integer> path){
+        if(root == null){
+            return;
+        }
+        
+        path.add(root.data);
+        
+        if(root.left == null && root.right == null){
+            System.out.print("\npath : " + path);
+        }
+        printPath(root.left, path);
+        printPath(root.right, path);
+        path.remove(path.size() - 1);
+    }
     public static void main(String[] args) {
         
-        int values[] = {80,6,-1,522,-10,5,87,4};
+        int values[] = {80,659,16,522,10,5,3,1,4};
         Node root = null;
 
         for(int i:values){
@@ -105,8 +173,12 @@ public class BSTbasics {
         }
         inOrderTraversal(root);
         // IsAvalibleInBST(root, 6);
-        System.out.println(IsAvalibleInBST(root, -100));
-        delet(root, 5);
-        inOrderTraversal(root);
+        System.out.println("\n" + IsAvalibleInBST(root, -10));
+        // delet(root, 5);
+        // inOrderTraversal(root);
+        levelOrder(root);
+        // System.out.println();
+        printInRange(root, 0, 87);
+        printPath(root, new ArrayList<>());
     }
 }
