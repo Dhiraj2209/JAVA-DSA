@@ -186,12 +186,12 @@ public class BSTbasics {
             root = insertNodeinBST(root, i);
         }
         inOrderTraversal(root);
-        // IsAvalibleInBST(root, 6);
+        IsAvalibleInBST(root, 6);
         System.out.println("\n Is avalible in BST : " + IsAvalibleInBST(root, 80));
-        // delet(root, 5);
-        // inOrderTraversal(root);
-        //levelOrder(root);
-        // System.out.println();
+        delet(root, 5);
+        inOrderTraversal(root);
+        levelOrder(root);
+        System.out.println();
         printInRange(root, 0, 87);
         printPath(root, new ArrayList<>());
         System.out.println("\n Is given binary tree is valid : "+isValidBST(root, null, null));
